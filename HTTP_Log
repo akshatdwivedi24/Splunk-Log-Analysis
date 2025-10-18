@@ -18,6 +18,7 @@ index="http_lab" source="http.json" host="GODSPEED" sourcetype="_json"
 
     ```
 
+
 Aim: Identify the most active clients communicating with the server, helping spot heavy users or potential attackers.
 
 

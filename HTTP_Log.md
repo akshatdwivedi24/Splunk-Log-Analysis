@@ -11,12 +11,12 @@ Splunk Log Analysis & Dashboarding
 1️⃣ Top Source IPs by HTTP Requests
     Question: Which source IPs generated the most HTTP requests?
 
-    ```
+```
      index="http_lab" source="http.json" host="GODSPEED" sourcetype="_json"
      | stats count by id.orig_h
      | sort -count
 
-    ```
+ ```
 
 
 Aim: Identify the most active clients communicating with the server, helping spot heavy users or potential attackers.

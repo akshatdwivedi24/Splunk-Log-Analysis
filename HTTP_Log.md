@@ -12,9 +12,9 @@ Splunk Log Analysis & Dashboarding
     Question: Which source IPs generated the most HTTP requests?
 
     ```
-index="http_lab" source="http.json" host="GODSPEED" sourcetype="_json"
-| stats count by id.orig_h
-| sort -count
+     index="http_lab" source="http.json" host="GODSPEED" sourcetype="_json"
+     | stats count by id.orig_h
+     | sort -count
 
     ```
 

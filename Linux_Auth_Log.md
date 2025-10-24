@@ -16,3 +16,74 @@ Develop actionable queries and visualizations for a Splunk dashboard to provide 
  ```
     index="auth_log" (event_type=SYSCALL_DENIED OR event_type=AVC_DENIED) | stats count AS Total_Denied_Events
  ```
+
+<img width="1920" height="883" alt="Screenshot (118)" src="https://github.com/user-attachments/assets/e14ad845-8412-4ff3-ba5c-865c67344690" />
+
+
+Aim: Identify the Top 10 Most Targeted Files to understand the most sought-after resources, providing a clear map of the attacker's interest (e.g., SSH keys, configuration files).
+
+
+2️⃣ Reconnaissance & Credential Theft
+    Focuses on files used to enumerate system users, hosts, or steal credentials.
+
+```
+   index="auth_log" (SYSCALL_DENIED OR AVC_DENIED) path IN ("/etc/passwd", "/etc/hosts", "/etc/shadow") | stats count by path, uid, process
+```
+
+<img width="1920" height="875" alt="Screenshot (119)" src="https://github.com/user-attachments/assets/75d1c9ca-fa10-4516-9d06-883a2d4b7540" />
+
+
+Aim: Identify users and processes attempting to perform initial discovery and data theft techniques against critical system files.
+
+
+3️⃣ Evasion and Persistence Tactics
+    Identifies attempts to maintain access (persistence) or cover tracks (evasion).
+
+
+```
+  index="auth_log" (SYSCALL_DENIED OR AVC_DENIED) path IN ("/var/log/auth.log", "/var/log/syslog", "/root/.bash_history")
+```
+
+<img width="1920" height="1080" alt="Screenshot (120)" src="https://github.com/user-attachments/assets/4c9979b4-601e-4155-ab39-7fd6c9bb742e" />
+
+Aim: Detect actions characteristic of the Execution or Command and Control phases, specifically denial attempts against files used for task scheduling, adding users, or downloading payloads.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+

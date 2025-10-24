@@ -9,9 +9,10 @@ Develop actionable queries and visualizations for a Splunk dashboard to provide 
 
 
 🎯 Auditd Log Analysis and Key Queries:
+
 1️⃣ Triage: Overall Scope and Active Users
     Quantifies all permission denial events and identifies the most frequent offenders.
 
-    ```
+ ```
     index="auth_log" (event_type=SYSCALL_DENIED OR event_type=AVC_DENIED) | stats count AS Total_Denied_Events
-    ```
+ ```

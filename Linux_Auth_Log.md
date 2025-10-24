@@ -49,6 +49,28 @@ Aim: Identify users and processes attempting to perform initial discovery and da
 Aim: Detect actions characteristic of the Execution or Command and Control phases, specifically denial attempts against files used for task scheduling, adding users, or downloading payloads.
 
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+🖥️ Dashboard Visualizations: Unauthorized Access Incident
+
+
+The following panels were developed to provide security analysts with real-time visibility into the scale, priority, and source of the unauthorized access attempts.
+
+
+1️⃣ Attack Timeline: Density of Denial Events
+    Shows the temporal distribution of all unauthorized actions to identify attack windows.
+
+```
+index="auth_log" (event_type=SYSCALL_DENIED OR event_type=AVC_DENIED) 
+| timechart span=1h count AS Denied_Events
+```
+<img width="1885" height="649" alt="image" src="https://github.com/user-attachments/assets/a572f814-405e-4e3b-8a0f-38b223ad9c58" />
+
+
+Aim: Identify spikes in activity, pin-pointing the hours or minutes when the attacker was most active on the system. This visualization helps set the incident's official timeframe.
+
+
 
 
 

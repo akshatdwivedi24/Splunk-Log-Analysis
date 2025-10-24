@@ -71,6 +71,49 @@ index="auth_log" (event_type=SYSCALL_DENIED OR event_type=AVC_DENIED)
 Aim: Identify spikes in activity, pin-pointing the hours or minutes when the attacker was most active on the system. This visualization helps set the incident's official timeframe.
 
 
+2️⃣ Target Heatmap: Top 10 High-Value Paths
+    Ranks the files and directories that received the highest volume of unauthorized access attempts.
+
+```
+index="auth_log" (event_type=SYSCALL_DENIED OR event_type=AVC_DENIED) 
+| top 10 path
+```
+
+<img width="1844" height="644" alt="image" src="https://github.com/user-attachments/assets/e5e12084-0c03-4c4b-b391-3f8c606f9e89" />
+
+Aim: Provides an instant prioritization map for the incident response team. Files related to credentials (/etc/shadow) and system configuration should immediately flag as critical risks.
+
+
+3️⃣ Attacker Attribution: Most Active User IDs
+    Identifies which system users (UIDs) were the primary source of the denied events.
+
+```
+index="auth_log" (event_type=SYSCALL_DENIED OR event_type=AVC_DENIED) 
+| stats count by uid 
+| sort -count
+```
+<img width="1838" height="586" alt="image" src="https://github.com/user-attachments/assets/ce8d5b8c-7b2f-4fd4-945d-147a93a47cb6" />
+
+Aim: Quickly identify the compromised accounts. The UIDs responsible for the highest number of denials should be immediately investigated and potentially disabled.
+
+
+4️⃣ TTP Analysis: Escalation Attempt Breakdown
+    Correlates the actions (process) used against specific high-risk targets (/etc/sudoers, SSH keys).
+
+```
+index="auth_log" (event_type=SYSCALL_DENIED OR event_type=AVC_DENIED) 
+path IN ("/etc/sudoers", "/root/.ssh/authorized_keys") 
+| stats count by process, path
+
+```
+<img width="1851" height="352" alt="image" src="https://github.com/user-attachments/assets/ba97ddd3-d003-48fc-a235-fde50d218677" />
+
+Aim: Move beyond simple counting by showing how the denial attempts were made (e.g., using mv or cp). This is crucial for understanding the attacker's preferred toolset and planning future process-level detections.
+
+
+
+
+
 
 
 
